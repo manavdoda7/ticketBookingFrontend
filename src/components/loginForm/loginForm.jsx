@@ -20,7 +20,7 @@ const loginForm = ({type}) => {
         password:password
     }).then((response)=>{
         if(response.data) {
-            window.localStorage.setItem("token", response.data.token)
+            window.localStorage.setItem(`${type}Token`, response.data.token)
             alert('User logged in.')
         } else {
             alert('Please try again.')

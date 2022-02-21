@@ -32,7 +32,7 @@ const registerForm = () => {
         })
     }
   return (
-    <section className="vh100">
+    <section className="vh100" style={{background:'#F4F4F5'}}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
