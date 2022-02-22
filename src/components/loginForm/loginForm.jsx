@@ -13,7 +13,7 @@ const loginForm = ({type}) => {
     let password = document.getElementById('password').value
     // console.log(email, password)
     let partialUrl
-    if(type=='Client') partialUrl = '/authenticate/user/login'
+    if(type==='Client') partialUrl = '/authenticate/user/login'
     else partialUrl = '/authenticate/provider/login'
     axios.post(url+ partialUrl, {
         email: email,
@@ -21,7 +21,7 @@ const loginForm = ({type}) => {
     }).then((response)=>{
         if(response.data) {
             window.localStorage.setItem(`${type}Token`, response.data.token)
-            alert('User logged in.')
+            window.location.href=`dashboard`
         } else {
             alert('Please try again.')
         }
@@ -35,7 +35,7 @@ const loginForm = ({type}) => {
     })
   }
   let to
-  if(type=='Client') to='/user/register'
+  if(type==='Client') to='/user/register'
   else to='/provider/register'
   return (
     <section className="vh100" style={{background:'#F4F4F5'}}>
