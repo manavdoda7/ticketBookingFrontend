@@ -12,10 +12,7 @@ const loginForm = ({type}) => {
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
     // console.log(email, password)
-    let partialUrl
-    if(type==='Client') partialUrl = '/authenticate/user/login'
-    else partialUrl = '/authenticate/provider/login'
-    axios.post(url+ partialUrl, {
+    axios.post(url+ '/authenticate/'+type+'/login', {
         email: email,
         password:password
     }).then((response)=>{
@@ -34,9 +31,6 @@ const loginForm = ({type}) => {
         }
     })
   }
-  let to
-  if(type==='Client') to='/user/register'
-  else to='/provider/register'
   return (
     <section className="vh100" style={{background:'#F4F4F5'}}>
       <div className="container py-5 h-100" >
@@ -54,7 +48,7 @@ const loginForm = ({type}) => {
                       <Input label="Email" type="email" id="email" />
                       <Input label="Password" type="password" id="password" />
                       <Button type="submit" value="Login" classes={"btn btn-primary mx-1"} />
-                      <Link type="submit" to={to} className="btn btn-outline-dark mx-1" >Register</Link>
+                      <Link to={'/'+type+'/register'} className="btn btn-outline-dark mx-1" >Register</Link>
                     </form>
                   </div>
                 </div>

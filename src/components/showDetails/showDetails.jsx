@@ -18,41 +18,60 @@ const deleteShow = (e, id) => {
     })
 }
 
-const ProviderShowDetails = () => {
+const ProviderShowDetails = ({type}) => {
     const { id } = useParams();
     const [content, setContent] = useState()
     const [showDetails, setShowDetails] = useState()
     useEffect(()=>{
-        if(localStorage.getItem('ProviderToken')===null || localStorage.getItem('ProviderToken')==='none') {
+        if(localStorage.getItem(type+'Token')===null || localStorage.getItem(type+'Token')==='none') {
             alert('Please sign in again')
-            window.location.href='/provider/login'
+            window.location.href='/'+type+'/login'
         } else {
-            axios.get(url+'/provider/shows/'+id, {
+            axios.get(url+'/'+type+'/shows/'+id, {
                 headers: {
-                    authorization: 'Bearer '+localStorage.getItem('ProviderToken')
+                    authorization: 'Bearer '+localStorage.getItem(type+'Token')
                 }
             }).then((response)=>{
                 console.log(response.data)
                 const arr = response.data.show.hallBookings.map((obj)=>{
                     const arr = obj.begTime.split(/[:T -.]/)
-                    return (
-                        <div className="col-lg-4" key={obj.id}>
-                            <div className="card ml-2 mt-2">
-                                <div className="card-body">
-                                    <h6 className="card-title">Date: {arr[2]}/{arr[1]}/{arr[0]}</h6>
-                                    <h6 className='card-title'>Time: {arr[3]}:{arr[4]}:{arr[5]}</h6>
-                                    <p className="card-text">Hall Number: {obj.hallNumber}</p>
-                                    <button className="btn btn-primary">See Bookings</button>
+                    if(type==='Provider') {
+                        return (
+                            <div className="col-lg-4" key={obj.id}>
+                                <div className="card ml-2 mt-2">
+                                    <div className="card-body">
+                                        <h6 className="card-title">Date: {arr[2]}/{arr[1]}/{arr[0]}</h6>
+                                        <h6 className='card-title'>Time: {arr[3]}:{arr[4]}:{arr[5]}</h6>
+                                        <p className="card-text">Hall Number: {obj.hallNumber}</p>
+                                        <button className="btn btn-primary">See Bookings</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
+                        )
+                    } else {
+                        return (
+                            <div className="col-lg-4" key={obj.id}>
+                                <div className="card ml-2 mt-2">
+                                    <div className="card-body">
+                                        <h6 className="card-title">Date: {arr[2]}/{arr[1]}/{arr[0]}</h6>
+                                        <h6 className='card-title'>Time: {arr[3]}:{arr[4]}:{arr[5]}</h6>
+                                        <p className="card-text">Hall Number: {obj.hallNumber}</p>
+                                        <button className="btn btn-primary">Create Booking</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
                 })
                 setContent(arr)
+                let deleteButton = ''
+                if(type==='Provider') {
+                    deleteButton=(<div className='form-group'>
+                        <button className='btn btn-danger float-end' onClick={(e, id=response.data.show.id)=>deleteShow(e, id)}>Delete</button>
+                    </div>)
+                }
                 setShowDetails(<>
-                        <div className='form-group'>
-                            <button className='btn btn-danger float-end' onClick={(e, id=response.data.show.id)=>deleteShow(e, id)}>Delete</button>
-                        </div>
+                        {deleteButton}
                         <div>
                             <div className='pt-3' style={{position:'absolute', left:'270px'}}>
                                 <h2>Show Name: {response.data.show.name}</h2>

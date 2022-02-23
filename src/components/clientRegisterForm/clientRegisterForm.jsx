@@ -41,7 +41,7 @@ const registerForm = () => {
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
                     <form onSubmit={submitHandler}>
-                      <h1>Client Register</h1>
+                      <h1>User Registeration</h1>
                       <Input label="Email" type="email" id="email" />
                       <Input label="Password" type="password" id="password" />
                       <Input label="First Name" type="text" id="firstName" />

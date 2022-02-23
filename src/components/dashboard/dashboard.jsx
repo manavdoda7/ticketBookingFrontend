@@ -2,23 +2,24 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './dashboard.css'
 import {url} from '../../backend'
+import { Link } from 'react-router-dom'
 
-const fetchShowDetails = (e, id) => {
+const fetchShowDetails = (e, id, type) => {
     e.preventDefault()
-    window.location.href='/provider/shows/'+id
+    window.location.href='/'+type+'/shows/'+id
 }
 
-const ProviderDashboard = () => {
+const Dashboard = ({type}) => {
     const [showsList, setShowsList] = useState('Loading')
     useEffect(()=>{
-        if(localStorage.getItem('ProviderToken')!==null && localStorage.getItem('ProviderToken')!=='none') {
+        if(localStorage.getItem(type+'Token')!==null && localStorage.getItem(type+'Token')!=='none') {
             // console.log(localStorage.getItem('ProviderToken'))
-            axios.get(url+'/provider/shows', {
+            axios.get(url+'/'+type+'/shows', {
                 headers: {
-                    authorization: 'Bearer '+localStorage.getItem('ProviderToken')
+                    authorization: 'Bearer '+localStorage.getItem(type+'Token')
                 }
             }).then((response)=>{
-                console.log(response.data.shows)
+                console.log(response.data)
                 const cards = response.data.shows.map((show)=>{
                     return (
                         <li className="cards_item" key={show.id}>
@@ -30,7 +31,7 @@ const ProviderDashboard = () => {
                                 <h6>Rated: {show.rated}</h6>
                                 <h6>Ratings: {show.ratings}</h6>
                                 <h6>Duration: {show.duration.hours}:{show.duration.minutes}:{show.duration.seconds}</h6>
-                                <button onClick={(e, id=show.id)=>fetchShowDetails(e, id)} className="btn card_btn">Show Complete Info</button>
+                                <button onClick={(e, id=show.id)=>fetchShowDetails(e, id, type)} className="btn card_btn">Show Complete Info</button>
                                 </div>
                             </div>
                         </li>
@@ -43,20 +44,26 @@ const ProviderDashboard = () => {
             })
         } else {
             alert('Please sign in again.')
-            window.location.href="/provider/login"
+            window.location.href="/"+type+"/login"
         }
     },[])
-        
+        let createButton = ''
+        if(type==='Provider') {
+            <div className='form-group'>
+                <Link to='/provider/createshow' className='btn btn-outline-dark float-end'>Create Show</Link>
+            </div>
+        }
   return (
     <section>
-        <div className="main">
-  <h1 className='text-center'>Provider Dashboard</h1>
-  <ul className="cards">
-    {showsList}
-  </ul>
-</div>
+        <div className="main mt-3">
+        {createButton}
+        <h1 className='text-center'>{type} Dashboard</h1>
+        <ul className="cards">
+            {showsList}
+        </ul>
+        </div>
     </section>
   )
 }
 
-export default ProviderDashboard
+export default Dashboard
