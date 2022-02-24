@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {url} from '../../backend'
+import { Link } from 'react-router-dom'
 
 const ShowBookings = () => {
     const [table, setTable] = useState(<div className='text-center'>No entries to show</div>)
@@ -33,10 +34,13 @@ const ShowBookings = () => {
         }).catch((err)=>{
             console.log(err)
         })
-    })
+    },[])
   return (<>
-    <h1 className='text-center mt-3'>Bookings List</h1>
-    <div className='container mt-2'>
+    <div className='container mt-3'>
+  <div className='form-group'>
+                <Link to='/user/dashboard' className='btn btn-outline-dark float-end'>Back to dashboard</Link>
+            </div>
+    <h1 className='text-center mb-2'>Bookings List</h1>
         <div className='table-responsive'>
         <table className="table table-sm">
   <thead>

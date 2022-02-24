@@ -8,10 +8,12 @@ import CreateShow from "./components/createShow/createShow";
 import CreateBooking from "./components/createBooking/createBooking";
 import ShowBookings from "./components/showBookings/showBookings";
 import ProviderBookings from './components/providerBookings/providerBookings'
+import Homepage from "./components/homepage/homepage";
 function App() {
   return (
     <Router>
       <Routes>
+        <Route exact path="/" element={<Homepage/>} />
         <Route exact path="/user/register" element={<ClientRegisterForm/>} />
         <Route exact path="/provider/register" element={<ProviderRegisterForm/>} />
         <Route exact path="/user/login" element={<LoginForm type='User'/>} />

@@ -42,7 +42,7 @@ const CreateBooking = () => {
             }).then((response)=>{
                 if(response.data.success===true) {
                     alert('Tickets Booked')
-                    window.location.href = '/user/createbooking/'+id
+                    window.location.href = '/user/bookings/'
                 } else {
                     alert(response.data.message)
                 }
