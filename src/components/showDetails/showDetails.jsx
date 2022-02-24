@@ -44,7 +44,7 @@ const ProviderShowDetails = ({type}) => {
                                         <h6 className="card-title">Date: {arr[2]}/{arr[1]}/{arr[0]}</h6>
                                         <h6 className='card-title'>Time: {arr[3]}:{arr[4]}:{arr[5]}</h6>
                                         <p className="card-text">Hall Number: {obj.hallNumber}</p>
-                                        <button className="btn btn-primary">See Bookings</button>
+                                        <Link to={'/provider/bookings/'+obj.id} className="btn btn-primary">See Bookings</Link>
                                     </div>
                                 </div>
                             </div>

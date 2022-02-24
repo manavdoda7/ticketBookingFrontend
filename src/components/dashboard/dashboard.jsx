@@ -47,11 +47,15 @@ const Dashboard = ({type}) => {
             window.location.href="/"+type+"/login"
         }
     },[type])
-        let createButton = ''
-        if(type==='Provider') {
+        let createButton = (
             <div className='form-group'>
-                <Link to='/provider/createshow' className='btn btn-outline-dark float-end'>Create Show</Link>
+                <Link to='/user/bookings' className='btn btn-outline-dark float-end'>Show Bookings</Link>
             </div>
+        )
+        if(type==='Provider') {
+            createButton = (<div className='form-group'>
+                <Link to='/provider/createshow' className='btn btn-outline-dark float-end'>Create Show</Link>
+            </div>)
         }
   return (
     <section>
