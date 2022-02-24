@@ -46,7 +46,7 @@ const Dashboard = ({type}) => {
             alert('Please sign in again.')
             window.location.href="/"+type+"/login"
         }
-    },[])
+    },[type])
         let createButton = ''
         if(type==='Provider') {
             <div className='form-group'>

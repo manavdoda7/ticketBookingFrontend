@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/dashboard/dashboard";
 import ShowDetails from "./components/showDetails/showDetails";
 import CreateShow from "./components/createShow/createShow";
+import CreateBooking from "./components/createBooking/createBooking";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/user/shows/:id" element={<ShowDetails type='User'/>} />
         <Route exact path="/provider/shows/:id" element={<ShowDetails type='Provider'/>} />
         <Route exact path="/provider/createShow" element={<CreateShow />} />
+        <Route exact path="/user/createbooking/:id" element={<CreateBooking />} />
       </Routes>
     </Router>
   );

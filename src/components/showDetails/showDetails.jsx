@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {url} from '../../backend'
+import { Link } from 'react-router-dom'
 
 const deleteShow = (e, id) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ const ProviderShowDetails = ({type}) => {
                                         <h6 className="card-title">Date: {arr[2]}/{arr[1]}/{arr[0]}</h6>
                                         <h6 className='card-title'>Time: {arr[3]}:{arr[4]}:{arr[5]}</h6>
                                         <p className="card-text">Hall Number: {obj.hallNumber}</p>
-                                        <button className="btn btn-primary">Create Booking</button>
+                                        <Link to={'/user/createbooking/'+obj.id} className="btn btn-primary">Create Booking</Link>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +91,7 @@ const ProviderShowDetails = ({type}) => {
                 alert('Please try again later')
             })
         }
-    },[id])
+    },[id,type])
   return (<>
     <div className="modal-body">
         <h1 className='text-center'>Show Info</h1>

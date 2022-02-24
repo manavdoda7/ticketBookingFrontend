@@ -82,7 +82,10 @@ const CreateShow = () => {
         <label htmlFor='Duration' className="form-label">Duration</label>
         <input type='time' step='1' className="form-control" id='duration' required />
       </div>
-      <Input label="Number of Slots" type="number" id="slots" />
+      <div className="mb-3">
+        <label htmlFor='Number of Slots' className="form-label">Number of slots</label>
+        <input type='number' step='1' className="form-control" min='1' id='slots' required />
+      </div>
       <Button type="submit" value="Add slots" classes={"btn btn-primary mx-1"} />
     </form>
   )

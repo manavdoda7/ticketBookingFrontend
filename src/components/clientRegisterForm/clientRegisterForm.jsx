@@ -20,7 +20,7 @@ const registerForm = () => {
             lastName: lastName,
             mobile: mobile
         }).then((response)=>{
-            if(response.data.success==true) {
+            if(response.data.success===true) {
                 alert('User registered.')
                 window.location.href = "http://localhost:3000/user/login";
             } else {
