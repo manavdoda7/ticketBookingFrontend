@@ -33,7 +33,7 @@ const ProviderBookings = () => {
         }).catch((err)=>{
             console.log(err)
         })
-    }, [])
+    }, [id])
   return (<>
     <h1 className='text-center mt-3'>Bookings List</h1>
     <div className='container mt-2'>
